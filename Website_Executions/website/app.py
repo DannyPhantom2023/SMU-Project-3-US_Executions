@@ -11,7 +11,7 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 #################################################
 # Database Setup
 #################################################
-engine = create_engine("sqlite:///data/eruptions.sqlite")
+engine = create_engine("sqlite:///Data/executions.sqlite")
 
 # Route to render index.html template using data from Mongo
 @app.route("/")
@@ -30,28 +30,27 @@ def plots():
     return render_template("plots.html")
 
 ##########################################################################
-
-@app.route("/api/v1.0/<min_year>/<max_year>")
-def eruptions_start_end(min_year, max_year):
+@app.route("/api/v1.0/Execution_Data")
+def executions_by_state():
     """Get stations"""
     query = text(f"""
                 SELECT
                     *
                 FROM
-                    eruptions
-                WHERE
-                    start_year >= {min_year}
-                    AND start_year <= {max_year};
+                    executions;
+                
+                    
             """)
 
+
     df = pd.read_sql(query, engine)
-    df2 = df.volcano_name.value_counts().reset_index()
-    df2.columns = ["volcano_name", "counts"]
+    df2 = df.State.value_counts().reset_index()
+    df2.columns = ["State", "Total_Execution"]
 
     data = json.loads(df.to_json(orient="records"))
     data2 = json.loads(df2.to_json(orient="records"))
 
-    return({"raw_data": data, "volcanoes": data2})
+    return({"raw_data": data, "deaths_by_state": data2})
 
 #############################################################
 
@@ -69,4 +68,4 @@ def add_header(r):
 
 #main
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0') 
