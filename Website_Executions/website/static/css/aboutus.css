@@ -58,7 +58,7 @@ body{
 .skills button:hover{
     transition: 1s;
     background-color: #ecf5f5;
-    color: #00999c;
+    color: #000000e0;
 }
 @media screen and (max-width:1200px){
     .inner-section{
