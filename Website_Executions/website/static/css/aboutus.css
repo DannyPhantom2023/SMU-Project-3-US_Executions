@@ -23,8 +23,8 @@ body{
     width: 55%;
     float: right;
     background-color: #e6caa3;
-    padding: 140px;
-    box-shadow: 13px 12px 8px rgba(0,0,0,0.3);
+    padding: 120px;
+    box-shadow: 11px 12px 8px rgba(0,0,0,0.3);
 }
 .inner-section h1{
     margin-bottom: 30px;
