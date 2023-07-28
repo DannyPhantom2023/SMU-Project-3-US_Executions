@@ -1,5 +1,5 @@
 # SMU-Project-3-US_Executions
-The Interactive Executions Visualization project aims to provide a comprehensive and user-friendly platform for exploring and understanding historical data on executions in the United States. The project encompasses interactive visualizations and an interactive map, all made accessible through a dynamic website.
+The Execution Xplore project aims to provide a comprehensive and user-friendly platform for exploring and understanding historical data on executions in the United States. The project encompasses interactive visualizations and an interactive map, all made accessible through a dynamic website.
 
 The main objectives of this project are as follows:
 
