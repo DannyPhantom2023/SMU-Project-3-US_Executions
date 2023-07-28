@@ -33,316 +33,379 @@ function updateDropdown() {
 //##################################################
 //Bar Graph
 function makeBarGraph(data, dataset) {
+    // Count the number of occurances of executions per state
     let stateCounts = data.reduce((count, item) => {
     let state = item.State;
     count[state] = (count[state] || 0) + 1;
     return count;
     }, {});
-  
-      // Extract state names and counts
+      
+    // Extract state names and counts
     let stateNames = Object.keys(stateCounts);
     let counts = Object.values(stateCounts);
-      
+          
     // Sort the stateNames and counts arrays in descending order
-    let sortedIndices = counts.map((_, index) => index)
-                            .sort((a, b) => counts[b] - counts[a]);
+    let sortedIndices = counts.map((_, index) => index).sort((a, b) => counts[b] - counts[a]);
     let states = sortedIndices.map(index => stateNames[index]);
     let sortedCounts = sortedIndices.map(index => counts[index]);
-    console.log(states);
-
-if (dataset === 'Total') {
+    
+    if (dataset === 'Total') {
+        // Create the trace for the chart
+        let traces = [{
+            x: states,
+            y: sortedCounts,
+            type: 'bar',
+        }];
       
-      // Create the trace for the bar chart
-    let traces = [{
-        x: states,
-        y: sortedCounts,
-        type: 'bar',
-    }];
-  
-      // Layout configuration
-    let layout = {
-        title: 'Number of Executions by State',
-        xaxis: {
-          title: 'Number of Executions',
-        },
-        yaxis: {
-          title: 'State',
-        },
-    };
-  
-      // Plot the chart
-    Plotly.newPlot('bargraph', traces, layout);
-}
-else if (dataset === 'Method') {
-    let colors = ['red','blue', 'green','yellow','purple'];
-    let methods = Array.from(new Set(data.map(item => item.Method))).sort();
-    console.log(methods);
-    let traces = methods.map((method, index) => {
-        let countPerState = states.map(state => {
-            return data.reduce((count, item) => {
-            return item.Method === method && item.State === state ? count + 1 : count;
-            }, 0);
-        });
-        console.log(countPerState);
-        console.log(states);
-        return {
-            x: states,
-            y: countPerState,
-            type: 'bar',
-            name: method,
-            marker: {color: colors[index]}
+        // Create the layout configuration
+        let layout = {
+            title: 'Executions by State',
+            xaxis: {
+              title: 'State',
+            },
+            yaxis: {
+              title: 'Executions',
+            },
         };
-    });
-    let layout = {
-        title: 'Count per Year by Method',
-        xaxis: {
-            title: 'Year'
-        },
-        yaxis: {
-            title: 'Count'
-        },
-        barmode: "stack",
-        legend: {'traceorder':'normal'}
-    };
-    let config = { responsive: true };
-    
-    Plotly.newPlot('bargraph', traces, layout, config);
-}
-else if (dataset === 'Race') {
-    let colors = ['red','blue', 'green','yellow','orange', 'purple'];
-    let races = Array.from(new Set(data.map(item => item.Race))).sort();
-    let traces = races.map((race, index) => {
-        let countPerState = states.map(state => {
-            return data.reduce((count, item) => {
-            return item.Race === race && item.State === state ? count + 1 : count;
-            }, 0);
+      
+        // Plot the chart
+        Plotly.newPlot('bargraph', traces, layout);
+    }
+    else if (dataset === 'Method') {
+        //Color scheme for method
+        let colors = ['red','blue', 'green','yellow','purple'];
+        
+        //Set up the array for methods
+        let methods = Array.from(new Set(data.map(item => item.Method))).sort();
+
+        //map the methods to the states and set up the trace for the chart
+        let traces = methods.map((method, index) => {
+            let countPerState = states.map(state => {
+                return data.reduce((count, item) => {
+                return item.Method === method && item.State === state ? count + 1 : count;
+                }, 0);
+            });
+
+            return {
+                x: states,
+                y: countPerState,
+                type: 'bar',
+                name: method,
+                marker: {color: colors[index]}
+            };
         });
-        console.log(countPerState);
-        console.log(states);
-        return {
-            x: states,
-            y: countPerState,
-            type: 'bar',
-            name: race,
-            marker: {color: colors[index]}
+        // Create the layout configuration
+        let layout = {
+            title: 'Execution Methods Used by State',
+            xaxis: {
+                title: 'State'
+            },
+            yaxis: {
+                title: 'Executions'
+            },
+            barmode: "stack",
+            legend: {'traceorder':'normal'}
         };
-    });
-    let layout = {
-        title: 'Count per Year by Method',
-        xaxis: {
-            title: 'Year'
-        },
-        yaxis: {
-            title: 'Count'
-        },
-        barmode: "stack",
-        legend: {'traceorder':'normal'}
-    };
-    let config = { responsive: true };
-    
-    Plotly.newPlot('bargraph', traces, layout, config);
-}
-else if (dataset === 'Sex') {
-    let colors = ['orange', 'purple'];
-    let sexes = Array.from(new Set(data.map(item => item.Sex))).sort();
-    sexes.reverse();
-    let traces = sexes.map((sex, index) => {
-        let countPerState = states.map(state => {
-            return data.reduce((count, item) => {
-            return item.Sex === sex && item.State === state ? count + 1 : count;
-            }, 0);
+        let config = { responsive: true };
+        
+        // Plot the chart
+        Plotly.newPlot('bargraph', traces, layout, config);
+    }
+    else if (dataset === 'Race') {
+        //Color scheme for race
+        let colors = ['red','blue', 'green','yellow','orange', 'purple'];
+        
+        //map the races to the states and set up the trace for the chart
+        let races = Array.from(new Set(data.map(item => item.Race))).sort();
+        let traces = races.map((race, index) => {
+            let countPerState = states.map(state => {
+                return data.reduce((count, item) => {
+                return item.Race === race && item.State === state ? count + 1 : count;
+                }, 0);
+            });
+
+            return {
+                x: states,
+                y: countPerState,
+                type: 'bar',
+                name: race,
+                marker: {color: colors[index]}
+            };
         });
-        console.log(countPerState);
-        console.log(states);
-        return {
-            x: states,
-            y: countPerState,
-            type: 'bar',
-            name: sex,
-            marker: {color: colors[index]}
+        // Create the layout configuration
+        let layout = {
+            title: 'Executions by Race per State',
+            xaxis: {
+                title: 'State'
+            },
+            yaxis: {
+                title: 'Executions'
+            },
+            barmode: "stack",
+            legend: {'traceorder':'normal'}
         };
-    });
-    let layout = {
-        title: 'Count per Year by Method',
-        xaxis: {
-            title: 'Year'
-        },
-        yaxis: {
-            title: 'Count'
-        },
-        barmode: "stack",
-        legend: {'traceorder':'normal'}
-    };
-    let config = { responsive: true };
-    
-    Plotly.newPlot('bargraph', traces, layout, config);
-}
+        let config = { responsive: true };
+        
+        // Plot the chart
+        Plotly.newPlot('bargraph', traces, layout, config);
+    }
+    else if (dataset === 'Sex') {
+        //Color scheme for method
+        let colors = ['orange', 'purple'];
+
+        //map the sexes to the states and set up the trace for the chart
+        let sexes = Array.from(new Set(data.map(item => item.Sex))).sort();
+        sexes.reverse();
+        let traces = sexes.map((sex, index) => {
+            let countPerState = states.map(state => {
+                return data.reduce((count, item) => {
+                return item.Sex === sex && item.State === state ? count + 1 : count;
+                }, 0);
+            });
+
+            return {
+                x: states,
+                y: countPerState,
+                type: 'bar',
+                name: sex,
+                marker: {color: colors[index]}
+            };
+        });
+        // Create the layout configuration
+        let layout = {
+            title: 'Executions by Sex per State',
+            xaxis: {
+                title: 'State'
+            },
+            yaxis: {
+                title: 'Executions'
+            },
+            barmode: "stack",
+            legend: {'traceorder':'normal'}
+        };
+        let config = { responsive: true };
+        
+        // Plot the chart
+        Plotly.newPlot('bargraph', traces, layout, config);
+    }
 }
 //##################################################
 //Pie Chart
 function makePieChart(data, dataset) {
     if (dataset === 'Total') {
-        let ages = data.map(item => item.Age);
-        // Count the occurrences of each race
-        let ageCounts = {};
-        ages.forEach(function(age) {
-        ageCounts[age] = (ageCounts[age] || 0) + 1;
+        //Color scheme for age groups
+        let colors = ['#cdddff','#89bbff', '#79aaff', '#6697ff', '#4a8dff', '#0C56BC'];
+
+        //set up a dictionary for the age groups and set up the count
+        let ageGroups = {"Under 30": 0, "30s":0, "40s": 0, "50s": 0, "60s": 0,"70 and Older": 0};
+        data.forEach(function(item) {
+            let age = item.Age;
+            if (age < 30) {
+                ageGroups["Under 30"]++;
+            } else if (age <= 30 && age <40) {
+                ageGroups["30s"]++;
+            } else if (age <= 40 && age <50) {
+                ageGroups["40s"]++;
+            }  else if (age <= 50 && age <60) {
+                ageGroups["50s"]++;
+            } else if (age <= 60 && age <70) {
+                ageGroups["60s"]++;
+            } else {
+                ageGroups["70 and Older"]++;
+            };
         });
-        // Extract the unique races and their respective counts
-        let ageNames = Object.keys(ageCounts);
-        let ageValues = Object.values(ageCounts);
+
+        // Extract the unique age grouos and their respective counts
+        let ageGroupNames = Object.keys(ageGroups);
+        let ageGroupValues = Object.values(ageGroups);
+        
         // Create the trace for the pie chart
         let trace = {
-        type: 'pie',
-        labels: ageNames,
-        values: ageValues,
-        textinfo: 'label+percent',
-        insidetextorientation: 'radial',
-        hoverinfo: 'label+value+percent',
-        hole: .5
+            type: 'pie',
+            labels: ageGroupNames,
+            values: ageGroupValues,
+            textinfo: 'label+percent',
+            insidetextorientation: 'horizontal',
+            marker: {colors: colors},
+            hoverinfo: 'label+value+percent',
+            hole: .4,
+            rotation: 90,
+            sort: false
         };
-        // Create the data array and layout for the pie chart
+
+        // Create the data array and layout configuration
         let pieData = [trace];
         let layout = {
-        title: 'Victim Counts by Method',
+        title: 'Age Ranges of Executed',
         };
-        // Plot the pie chart
+
+        // Plot the chart
         Plotly.newPlot('piechart', pieData, layout);
     }   
     else if (dataset === 'Method') {
+        //Color scheme for method
         let colors = ['red','blue', 'green','yellow','purple'];
+
+        //Organize Method alphabetically
         let methods = data.map(item => item.Method).sort();
-        // Count the occurrences of each race
+
+        // Count the occurrences of each Method
         let methodCounts = {};
         methods.forEach(function(method) {
         methodCounts[method] = (methodCounts[method] || 0) + 1;
         });
-        // Extract the unique races and their respective counts
+
+        // Extract the unique Methods and their respective counts
         let methodNames = Object.keys(methodCounts);
         let methodValues = Object.values(methodCounts);
-        console.log(methodNames);
+
         // Create the trace for the pie chart
         let trace = {
-        type: 'pie',
-        labels: methodNames,
-        values: methodValues,
-        textinfo: 'label+percent',
-        insidetextorientation: 'radial',
-        hoverinfo: 'label+value+percent',
-        hole: .4,
-        marker: {colors: colors},
-        sort: true    
+            type: 'pie',
+            labels: methodNames,
+            values: methodValues,
+            textinfo: 'label+percent',
+            insidetextorientation: 'horizontal',
+            hoverinfo: 'label+value+percent',
+            hole: .4,
+            marker: {colors: colors},
+            rotation: 90,
+            sort: false    
         };
-        // Create the data array and layout for the pie chart
+
+        // Create the data array and layout configuration
         let pieData = [trace];
+
         let layout = {
-            title: 'Victim Counts by Method'
+            title: 'Total Executions by Method'
         };
-        // Plot the pie chart
+
+        // Plot the chart
         Plotly.newPlot('piechart', pieData, layout);
     }   
     else if (dataset === 'Race') {
+        //Color scheme for race
         let colors = ['red','blue', 'green','yellow','orange', 'purple'];
         let races = data.map(item => item.Race).sort();
+
         // Count the occurrences of each race
         let raceCounts = {};
         races.forEach(function(race) {
         raceCounts[race] = (raceCounts[race] || 0) + 1;
         });
+
         // Extract the unique races and their respective counts
         let raceNames = Object.keys(raceCounts);
         let raceValues = Object.values(raceCounts);
+
         // Create the trace for the pie chart
         let trace = {
-        type: 'pie',
-        labels: raceNames,
-        values: raceValues,
-        textinfo: 'label+percent',
-        insidetextorientation: 'radial',
-        hoverinfo: 'label+value+percent',
-        hole: .4,
-        marker: {colors: colors},
-        sort: true   
+            type: 'pie',
+            labels: raceNames,
+            values: raceValues,
+            textinfo: 'label+percent',
+            insidetextorientation: 'horizontal',
+            hoverinfo: 'label+value+percent',
+            hole: .4,
+            marker: {colors: colors},
+            rotation: 90,
+            sort: false   
         };
-        // Create the data array and layout for the pie chart
+
+        // Create the data array and layout configuration
         let pieData = [trace];
         let layout = {
-        title: 'Victim Counts by Race',
+        title: 'Total Executions by Race',
         };
-        // Plot the pie chart
+
+        // Plot the chart
         Plotly.newPlot('piechart', pieData, layout);
-   }
-   else if (dataset === 'Sex') {
-    let colors = ['orange', 'purple'];
-    let sexes = data.map(item => item.Sex).sort();
-    sexes.reverse();
-    // Count the occurrences of each race
-    let sexCounts = {};
-    sexes.forEach(function(sex) {
-    sexCounts[sex] = (sexCounts[sex] || 0) + 1;
-    });
-    // Extract the unique races and their respective counts
-    let sexNames = Object.keys(sexCounts);
-    let sexValues = Object.values(sexCounts);
-    // Create the trace for the pie chart
-    let trace = {
-    type: 'pie',
-    labels: sexNames,
-    values: sexValues,
-    textinfo: 'label+percent',
-    insidetextorientation: 'radial',
-    hoverinfo: 'label+value+percent',
-    hole: .4,
-    marker: {colors: colors},
-    sort: true
-    };
-    // Create the data array and layout for the pie chart
-    let pieData = [trace];
-    let layout = {
-    title: 'Victim Counts by Sex',
-    };
-    // Plot the pie chart
-    Plotly.newPlot('piechart', pieData, layout);
+    }
+    else if (dataset === 'Sex') {
+        //Color scheme for sex
+        let colors = ['orange', 'purple'];
+        let sexes = data.map(item => item.Sex).sort();
+        sexes.reverse();
+
+        // Count the occurrences of each race
+        let sexCounts = {};
+        sexes.forEach(function(sex) {
+        sexCounts[sex] = (sexCounts[sex] || 0) + 1;
+        });
+
+        // Extract the unique races and their respective counts
+        let sexNames = Object.keys(sexCounts);
+        let sexValues = Object.values(sexCounts);
+
+        // Create the trace for the pie chart
+        let trace = {
+            type: 'pie',
+            labels: sexNames,
+            values: sexValues,
+            textinfo: 'label+percent',
+            insidetextorientation: 'horizontal',
+            hoverinfo: 'label+value+percent',
+            hole: .4,
+            marker: {colors: colors},
+            rotation: 90,
+            sort: false
+        };
+
+        // Create the data array and layout configuration
+        let pieData = [trace];
+        let layout = {
+        title: 'Total Executions by Sex',
+        };
+
+        // Plot the chart
+        Plotly.newPlot('piechart', pieData, layout);
     }  
 }
+
 //##################################################
-
-
-
-
+//LINE GRAPH
 function makeLineGraph(data, dataset) {
+    //Make an array of the years where an execution took place
     let years = Array.from(new Set(data.map(item => item.Year)));
     
     if (dataset === 'Total') {
-            let countPerYear = years.map(year => {
-                return data.reduce((count, item) => {
-                return item.Year === year ? count + 1 : count;
-                }, 0);
-            });
+        //Map the count of executions per year to the year
+        let countPerYear = years.map(year => {
+            return data.reduce((count, item) => {
+            return item.Year === year ? count + 1 : count;}, 
+            0);
+        });
 
-           traces = [ {
-                x: years,
-                y: countPerYear,
-                mode: 'lines+markers',
-                type: 'scatter',
-            }];
-
+        // Create the trace for the line graph
+        let traces = [{
+            x: years,
+            y: countPerYear,
+            mode: 'lines+markers',
+            type: 'scatter',
+        }];
+        
+        // Create the layout configuration
         let layout = {
-            title: 'Count per Year',
+            title: 'Executions per Year',
             xaxis: {
                 title: 'Year'
             },
             yaxis: {
-                title: 'Count'
+                title: 'Executions'
             }
         };
-        let config = { responsive: true };
         
+        let config = { responsive: true };
+        // Plot the chart
         Plotly.newPlot('lineplot', traces, layout, config);
-    }    
-   else if (dataset === 'Method') {
-        let methods = Array.from(new Set(data.map(item => item.Method)));
-        let traces = methods.map(method => {
+    }
+    else if (dataset === 'Method') {
+        //Color scheme for method
+        let colors = ['red','blue', 'green','yellow','purple'];
+
+        //map the methods to the states and set up the trace for the chart
+        let methods = Array.from(new Set(data.map(item => item.Method))).sort();
+        let traces = methods.map((method, index) => {
             let countPerYear = years.map(year => {
                 return data.reduce((count, item) => {
                 return item.Method === method && item.Year === year ? count + 1 : count;
@@ -354,27 +417,34 @@ function makeLineGraph(data, dataset) {
                 y: countPerYear,
                 mode: 'lines+markers',
                 type: 'scatter',
-                name: method
+                name: method,
+                marker: {color: colors[index]}
             };
         });
 
+        // Create the layout configuration
         let layout = {
-            title: 'Count per Year by Method',
+            title: 'Executions by Method per Year',
             xaxis: {
                 title: 'Year'
             },
             yaxis: {
-                title: 'Count'
-            }
+                title: 'Executions'
+            },
+            legend: {'traceorder':'normal'}
         };
         let config = { responsive: true };
-        
+
+        // Plot the chart
         Plotly.newPlot('lineplot', traces, layout, config);
     }
     else if (dataset === 'Race') {
-
-        let races = Array.from(new Set(data.map(item => item.Race)));
-        let traces = races.map(race => {
+        //Color scheme for race
+        let colors = ['red','blue', 'green','yellow','orange', 'purple'];
+        
+        //map the races to the states and set up the trace for the chart
+        let races = Array.from(new Set(data.map(item => item.Race))).sort();
+        let traces = races.map((race, index) => {
             let countPerYear = years.map(year => {
                 return data.reduce((count, item) => {
                 return item.Race === race && item.Year === year ? count + 1 : count;
@@ -386,27 +456,34 @@ function makeLineGraph(data, dataset) {
                 y: countPerYear,
                 mode: 'lines+markers',
                 type: 'scatter',
-                name: race
+                name: race,
+                marker: {color: colors[index]}
             };
         });
 
+        // Create the layout configuration
         let layout = {
-            title: 'Count per Year by Race',
+            title: 'Executions by Race per Year',
             xaxis: {
                 title: 'Year'
             },
             yaxis: {
-                title: 'Count'
-            }
+                title: 'Executions'
+            },
+            legend: {'traceorder':'normal'}
         };
         let config = { responsive: true };
         
         Plotly.newPlot('lineplot', traces, layout, config);
     }
     else if (dataset === 'Sex') {
-
-        let sexes = Array.from(new Set(data.map(item => item.Sex)));
-        let traces = sexes.map(sex => {
+        //Color scheme for sex
+        let colors = ['orange', 'purple'];
+        
+        //map the sexes to the states and set up the trace for the chart
+        let sexes = Array.from(new Set(data.map(item => item.Sex))).sort();
+        sexes.reverse();
+        let traces = sexes.map((sex, index) => {
             let countPerYear = years.map(year => {
                 return data.reduce((count, item) => {
                 return item.Sex === sex && item.Year === year ? count + 1 : count;
@@ -418,21 +495,25 @@ function makeLineGraph(data, dataset) {
                 y: countPerYear,
                 mode: 'lines+markers',
                 type: 'scatter',
-                name: sex
+                name: sex,
+                marker: {color: colors[index]}
             };
         });
 
+        // Create the layout configuration
         let layout = {
-            title: 'Count per Year by Sex',
+            title: 'Executions by Sex per Year',
             xaxis: {
                 title: 'Year'
             },
             yaxis: {
-                title: 'Count'
-            }
+                title: 'Executions'
+            },
+            legend: {'traceorder':'normal'}
         };
         let config = { responsive: true };
         
+        // Plot the chart
         Plotly.newPlot('lineplot', traces, layout, config);
         };
     }
