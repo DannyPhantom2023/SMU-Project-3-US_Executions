@@ -36,7 +36,12 @@
     <div class="col-md-2">
       <div class="well">
         <h5>Test Subject ID No.:</h5>
-        <select id="selDataset" onchange="optionChanged(this.value)"></select>
+        <select id="selDataset">
+          <option value="Total">Total</option>
+          <option value="Method">Method</option>
+          <option value="Race">Race</option>
+          <option value="Sex">Sex</option>
+        </select>
       </div>
       <div class="panel panel-primary">
         <div class="panel-heading">
@@ -46,30 +51,22 @@
       </div>
     </div>
     <div class="col-md-5">
-      <div id="bargraph" class="js-plotly-plot">
+      <div id="piechart" class="js-plotly-plot">
     </div>
     <div class="col-md-5">
-      <div id="gauge"></div>
+      <div id="bargraph" class="js-plotly-plot"></div>
     </div>
   </div>
   <div class="row">
     <div class="col-md-12">
-      <div id="bubble"></div>
+      <div id="lineplot" class="js-plotly-plot"></div>
     </div>
   </div>
 </div>
 
 <div id = test class="container px-4 px-lg-5">
   <!-- Create a container for the graph -->
-  <select id="selDataset">
-    <option value="Total">Total</option>
-    <option value="Method">Method</option>
-    <option value="Race">Race</option>
-    <option value="Sex">Sex</option>
-  </select>
-  <div id="lineplot" class="js-plotly-plot"></div>
   
-  <div id="piechart" class="js-plotly-plot"></div>
   <script src="static/js/viewplots.js"></script>
 </body>
 </html>
