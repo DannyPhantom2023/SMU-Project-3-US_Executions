@@ -27,6 +27,7 @@ def about_us():
 def plots():
     # Return template and data
     return render_template("plots.html")
+
 @app.route("/map")
 def map():
     # Return template and data
@@ -47,12 +48,9 @@ def executions_by_state():
 
 
     df = pd.read_sql(query, engine)
-    df2 = df.State.value_counts().reset_index()
-    df2.columns = ["State", "Total_Execution"]
 
     data = json.loads(df.to_json(orient="records"))
-    data2 = json.loads(df2.to_json(orient="records"))
-
+    
     return({"raw_data": data})
 
 #############################################################
