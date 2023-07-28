@@ -1,4 +1,4 @@
-#test
+/*
 *{
     margin: 0;
     padding: 0;
@@ -10,8 +10,9 @@ body{
     align-items: center;
     justify-content: center;
     background-color: #212121;
-}
-.about{
+}*/
+#test
+*.about{
     background: url(khan.jpg) no-repeat left;
     background-size: 70%;
     background-color: #000000e0;
