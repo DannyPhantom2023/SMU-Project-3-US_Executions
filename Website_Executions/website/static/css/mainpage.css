@@ -90,19 +90,20 @@
     scroll-behavior: smooth;
   }
 }
-
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
   font-size: var(--bs-body-font-size);
   font-weight: var(--bs-body-font-weight);
   line-height: var(--bs-body-line-height);
-  color: #e6caa3 !important;
+  color: #e6caa3;
   text-align: var(--bs-body-text-align);
   background-color: #000000e0 !important;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+
+
 
 hr {
   margin: 1rem 0;
