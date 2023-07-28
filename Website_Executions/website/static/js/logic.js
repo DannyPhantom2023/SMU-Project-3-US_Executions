@@ -1,15 +1,16 @@
-
+let url = "/api/v1.0/Execution_Data";
 
 
   
   function doWork() {
     
     // make request to flask
-    // d3.json(url).then(function (data) {
-    //   console.log(data);
-    //   });
-    console.log(fixed_coors);
-    createMap(fixed_coors);
+     d3.json(url).then(function (data) {
+       console.log(data);
+       createMap(data.raw_data);
+       });
+    //console.log(fixed_coors);
+    //createMap(fixed_coors);
   }
   
   function createMap(data) {
@@ -51,7 +52,7 @@
     let coords = [];
     for (let i = 0; i < data.length; i++){
         let inmate = data[i];
-        let location = inmate.Coordinates;
+        let location = [inmate.Latitude, inmate.Longitude];
   
       if (location) {
         let coord = location;
@@ -64,8 +65,10 @@
   
     // create heatmap layer
     let heatLayer = L.heatLayer(coords, {
-      radius: 25,
-      blur: 2
+      radius: 35,
+      blur: 25,
+      minOpacity: 0.4
+
     });
   
 
@@ -90,7 +93,7 @@
     let myMap = L.map("map", {
       center: [38.5820, -96.4617],
       zoom: 5.49,
-      layers: [street, markers]
+      layers: [street, heatLayer]
     });
   
     // STEP 5: Add the Layer Controls/Legend to the map
