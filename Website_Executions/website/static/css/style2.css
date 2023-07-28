@@ -13,14 +13,14 @@ body{
 .about{
     background: url(khan.jpg) no-repeat left;
     background-size: 70%;
-    background-color: #83992a;
+    background-color: #000000e0;
     overflow: hidden;
     padding: 300px 0;
 }
 .inner-section{
     width: 55%;
     float: right;
-    background-color: #eac48d;
+    background-color: #e6caa3;
     padding: 140px;
     box-shadow: 13px 12px 8px rgba(0,0,0,0.3);
 }
@@ -30,7 +30,7 @@ body{
     font-weight: 900;
 }
 .text{
-    font-size: 13px;
+    font-size: 15px;
     color: #545454;
     line-height: 30px;
     text-align: justify;
@@ -44,7 +44,7 @@ body{
     border-radius: 20px;
     padding: 8px;
     width: 200px;
-    background-color: #00999c;
+    background-color: #212121;
     color: white;
     cursor: pointer;
 }

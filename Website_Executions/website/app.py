@@ -6,12 +6,11 @@ import json
 
 # Create an instance of Flask
 app = Flask(__name__)
-app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 #################################################
 # Database Setup
 #################################################
-engine = create_engine("sqlite:///Data/executions.sqlite")
+engine = create_engine("sqlite:///data/executions.sqlite")
 
 # Route to render index.html template using data from Mongo
 @app.route("/")
@@ -28,6 +27,10 @@ def about_us():
 def plots():
     # Return template and data
     return render_template("plots.html")
+@app.route("/map")
+def map():
+    # Return template and data
+    return render_template("map.html")
 
 ##########################################################################
 @app.route("/api/v1.0/Execution_Data")
@@ -50,10 +53,16 @@ def executions_by_state():
     data = json.loads(df.to_json(orient="records"))
     data2 = json.loads(df2.to_json(orient="records"))
 
-    return({"raw_data": data, "deaths_by_state": data2})
+    return({"raw_data": data})
 
 #############################################################
 
+
+
+
+
+
+#############################################################
 @app.after_request
 def add_header(r):
     """
