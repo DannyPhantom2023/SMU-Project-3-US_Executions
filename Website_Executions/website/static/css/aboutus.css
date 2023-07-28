@@ -32,14 +32,15 @@ body{
     margin-bottom: 30px;
     font-size: 30px;
     font-weight: 900;
+    color: #545454;
 }
 
 .text{
-    font-size: 15px;
+    font-size: 20px;
     color: #545454;
     line-height: 30px;
     text-align: justify;
-    margin-bottom: 40px;
+    margin-bottom: 60px;
 }
 .skills button{
     font-size: 22px;
