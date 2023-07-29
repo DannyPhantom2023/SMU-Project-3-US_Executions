@@ -59,6 +59,7 @@ function makeBarGraph(data, dataset) {
       
         // Create the layout configuration
         let layout = {
+            paper_bgcolor:"#000000e",
             title: 'Executions by State',
             xaxis: {
               title: 'State',
@@ -96,15 +97,18 @@ function makeBarGraph(data, dataset) {
         });
         // Create the layout configuration
         let layout = {
+            paper_bgcolor:"#000000e",
             title: 'Execution Methods Used by State',
             xaxis: {
                 title: 'State'
+                 
             },
             yaxis: {
                 title: 'Executions'
             },
             barmode: "stack",
             legend: {'traceorder':'normal'}
+            
         };
         let config = { responsive: true };
         
@@ -134,6 +138,7 @@ function makeBarGraph(data, dataset) {
         });
         // Create the layout configuration
         let layout = {
+            paper_bgcolor:"#000000e",
             title: 'Executions by Race per State',
             xaxis: {
                 title: 'State'
@@ -173,6 +178,7 @@ function makeBarGraph(data, dataset) {
         });
         // Create the layout configuration
         let layout = {
+            paper_bgcolor:"#000000e",
             title: 'Executions by Sex per State',
             xaxis: {
                 title: 'State'
@@ -236,6 +242,7 @@ function makePieChart(data, dataset) {
         // Create the data array and layout configuration
         let pieData = [trace];
         let layout = {
+            paper_bgcolor:"#000000e",
         title: 'Age Ranges of Executed',
         };
 
@@ -277,6 +284,7 @@ function makePieChart(data, dataset) {
         let pieData = [trace];
 
         let layout = {
+            paper_bgcolor:"#000000e",
             title: 'Total Executions by Method'
         };
 
@@ -315,6 +323,7 @@ function makePieChart(data, dataset) {
         // Create the data array and layout configuration
         let pieData = [trace];
         let layout = {
+            paper_bgcolor:"#000000e",
         title: 'Total Executions by Race',
         };
 
@@ -354,6 +363,7 @@ function makePieChart(data, dataset) {
         // Create the data array and layout configuration
         let pieData = [trace];
         let layout = {
+            paper_bgcolor:"#000000e",
         title: 'Total Executions by Sex',
         };
 
@@ -386,6 +396,7 @@ function makeLineGraph(data, dataset) {
         
         // Create the layout configuration
         let layout = {
+            paper_bgcolor:"#000000e",
             title: 'Executions per Year',
             xaxis: {
                 title: 'Year'
@@ -424,6 +435,7 @@ function makeLineGraph(data, dataset) {
 
         // Create the layout configuration
         let layout = {
+            paper_bgcolor:"#000000e",
             title: 'Executions by Method per Year',
             xaxis: {
                 title: 'Year'
@@ -463,6 +475,7 @@ function makeLineGraph(data, dataset) {
 
         // Create the layout configuration
         let layout = {
+            paper_bgcolor:"#000000e",
             title: 'Executions by Race per Year',
             xaxis: {
                 title: 'Year'
@@ -502,6 +515,7 @@ function makeLineGraph(data, dataset) {
 
         // Create the layout configuration
         let layout = {
+            paper_bgcolor:"#000000e",
             title: 'Executions by Sex per Year',
             xaxis: {
                 title: 'Year'
