@@ -393,6 +393,7 @@ function makeLineGraph(data, dataset) {
             y: countPerYear,
             mode: 'lines+markers',
             type: 'scatter',
+            marker: {color:'#79aaff'}
         }];
         
         // Create the layout configuration
