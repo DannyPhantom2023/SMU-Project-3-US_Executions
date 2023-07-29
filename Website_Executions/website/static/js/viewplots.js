@@ -157,7 +157,7 @@ function makeBarGraph(data, dataset) {
     }
     else if (dataset === 'Sex') {
         //Color scheme for method
-        let colors = ['#3E78B2', '#4A525A'];
+        let colors = ['#3E78B2','#4A525A'];
 
         //map the sexes to the states and set up the trace for the chart
         let sexes = Array.from(new Set(data.map(item => item.Sex))).sort();
