@@ -118,7 +118,7 @@ function makeBarGraph(data, dataset) {
     }
     else if (dataset === 'Race') {
         //Color scheme for race
-        let colors = ['red','blue', 'green','yellow','orange', 'purple'];
+        let colors = ["#C5E063", "#6EB257", "#4AAD52", "#488B49", "#507255",  "#6cd4c5"];
         
         //map the races to the states and set up the trace for the chart
         let races = Array.from(new Set(data.map(item => item.Race))).sort();
@@ -294,7 +294,7 @@ function makePieChart(data, dataset) {
     }   
     else if (dataset === 'Race') {
         //Color scheme for race
-        let colors = ['red','blue', 'green','yellow','orange', 'purple'];
+        let colors = ["#C5E063", "#6EB257", "#4AAD52", "#488B49", "#507255",  "#6cd4c5"];
         let races = data.map(item => item.Race).sort();
 
         // Count the occurrences of each race
@@ -454,7 +454,7 @@ function makeLineGraph(data, dataset) {
     }
     else if (dataset === 'Race') {
         //Color scheme for race
-        let colors = ['red','blue', 'green','yellow','orange', 'purple'];
+        let colors = ["#C5E063", "#6EB257", "#4AAD52", "#488B49", "#507255",  "#6cd4c5"];
         
         //map the races to the states and set up the trace for the chart
         let races = Array.from(new Set(data.map(item => item.Race))).sort();
