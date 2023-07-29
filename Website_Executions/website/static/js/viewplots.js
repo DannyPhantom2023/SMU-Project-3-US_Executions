@@ -55,6 +55,7 @@ function makeBarGraph(data, dataset) {
             x: states,
             y: sortedCounts,
             type: 'bar',
+            marker: {color:'#79aaff'}
         }];
       
         // Create the layout configuration
@@ -74,7 +75,7 @@ function makeBarGraph(data, dataset) {
     }
     else if (dataset === 'Method') {
         //Color scheme for method
-        let colors = ['red','blue', 'green','yellow','purple'];
+        let colors = ['#63bff0','#a7d5ed','#c23728','#e1a692','#de6e56'];
         
         //Set up the array for methods
         let methods = Array.from(new Set(data.map(item => item.Method))).sort();
@@ -251,7 +252,7 @@ function makePieChart(data, dataset) {
     }   
     else if (dataset === 'Method') {
         //Color scheme for method
-        let colors = ['red','blue', 'green','yellow','purple'];
+        let colors = ['#63bff0','#a7d5ed','#c23728','#e1a692','#de6e56'];
 
         //Organize Method alphabetically
         let methods = data.map(item => item.Method).sort();
@@ -412,7 +413,7 @@ function makeLineGraph(data, dataset) {
     }
     else if (dataset === 'Method') {
         //Color scheme for method
-        let colors = ['red','blue', 'green','yellow','purple'];
+        let colors = ['#63bff0','#a7d5ed','#c23728','#e1a692','#de6e56'];
 
         //map the methods to the states and set up the trace for the chart
         let methods = Array.from(new Set(data.map(item => item.Method))).sort();
