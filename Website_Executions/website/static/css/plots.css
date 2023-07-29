@@ -1036,3 +1036,10 @@ body {
     padding-right: 3rem !important;
     padding-left: 3rem !important;
   }
+  .mb-lg-0 {
+    margin-bottom: 0 !important;
+  }
+
+  .ms-auto.mb-2.mb-lg-0 {
+    margin-left: auto !important;
+  }
