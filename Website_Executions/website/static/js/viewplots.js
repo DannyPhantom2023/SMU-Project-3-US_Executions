@@ -157,7 +157,7 @@ function makeBarGraph(data, dataset) {
     }
     else if (dataset === 'Sex') {
         //Color scheme for method
-        let colors = ['orange', 'purple'];
+        let colors = ['#3E78B2', '#004BA8'];
 
         //map the sexes to the states and set up the trace for the chart
         let sexes = Array.from(new Set(data.map(item => item.Sex))).sort();
@@ -333,7 +333,7 @@ function makePieChart(data, dataset) {
     }
     else if (dataset === 'Sex') {
         //Color scheme for sex
-        let colors = ['orange', 'purple'];
+        let colors = ['#3E78B2', '#004BA8'];
         let sexes = data.map(item => item.Sex).sort();
         sexes.reverse();
 
@@ -493,7 +493,7 @@ function makeLineGraph(data, dataset) {
     }
     else if (dataset === 'Sex') {
         //Color scheme for sex
-        let colors = ['orange', 'purple'];
+        let colors = ['#3E78B2', '#004BA8'];
         
         //map the sexes to the states and set up the trace for the chart
         let sexes = Array.from(new Set(data.map(item => item.Sex))).sort();
