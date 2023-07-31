@@ -26,26 +26,7 @@ let url = "/api/v1.0/Execution_Data";
       attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
     });
   
-    // STEP 2: CREATE THE OVERLAY LAYERS
-  
-    // function markerColor(Method) {
-    //   let color = "";
-    //   if (Method == "Electrocution") {
-    //     color = "yellow";
-    //   } else if (Method == "Firing Squad") {
-    //     color = "blue";
-    //   } else if (Method == "Gas Chamber") {
-    //     color = "green";
-    //   } else if (Method == "Hanging") {
-    //     color = "red";
-    //   } else {
-    //     color = "violet";
-    //   }
     
-    //   return color;
-    // }
-
-
 
     // Create an overlays object.
     let markers = L.markerClusterGroup();
