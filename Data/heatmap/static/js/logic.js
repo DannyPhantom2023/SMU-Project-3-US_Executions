@@ -55,7 +55,7 @@
   
       if (location) {
         let coord = location;
-        let marker = L.marker(coord).bindPopup(`${inmate.Name}<hr>${inmate.Age}`);
+        let marker = L.marker(coord).bindPopup(`${inmate.Name}<hr>Age:  ${inmate.Age} <br> Sex: ${inmate.Sex}<br> Race: ${inmate.Race}<br> Method: ${inmate.Method}<br> Year of Execution: ${inmate.Year}`);
         markers.addLayer(marker);
   
         coords.push(coord);
