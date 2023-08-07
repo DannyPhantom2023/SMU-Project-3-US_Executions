@@ -10,3 +10,5 @@ Interactive Visualizations: Using modern web technologies like D3.js, Plotly, or
 Interactive Map: Leveraging interactive mapping libraries like Leaflet or Mapbox, the project implements an interactive map that displays the geographical distribution of executions across the United States. Users can explore executions based on location and other relevant attributes.
 
 Web Application Development: The heart of the project is a user-friendly website where the interactive visualizations and map come together seamlessly. The website is designed to be responsive, providing an optimal viewing experience on both desktop and mobile devices.
+
+Website: http://dannyphantom2023.pythonanywhere.com
